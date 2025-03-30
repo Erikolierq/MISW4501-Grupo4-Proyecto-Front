@@ -1,0 +1,31 @@
+# Node.js
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Angular
+dist
+.angular
+.tmp
+coverage
+
+# Sistema
+*.lnk
+Thumbs.db
+Desktop.ini
+
+# VS Code / Windows
+.vscode
+*.swp
+*.bak
+*.tmp
+*.log
+
+# Git
+.git
+.gitignore
+
+# Docker config
+Dockerfile
+docker-compose.yml
+.env
