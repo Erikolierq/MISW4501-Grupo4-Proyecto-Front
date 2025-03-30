@@ -1,0 +1,9 @@
+<div class="product-detail-container" *ngIf="producto">
+  <h2>Detalle del Producto</h2>
+  <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+  <p><strong>Tipo:</strong> {{ producto.tipo }}</p>
+  <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
+  <p><strong>Ubicación:</strong> {{ producto.ubicacion }}</p>
+
+  <button routerLink="/productos">Volver al listado</button>
+</div>

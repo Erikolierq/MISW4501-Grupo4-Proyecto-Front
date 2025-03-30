@@ -1,0 +1,33 @@
+<!-- product-list.component.html -->
+<div class="header-section">
+  <h2>Inventarios</h2>
+  <div class="action-buttons">
+    <button>+ Adjuntar un producto</button>
+    <button>+ Cargar .CSV</button>
+  </div>
+</div>
+
+<div class="inventory-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Artículo</th>
+        <th>Cantidad</th>
+        <th>Fabricante</th>
+        <th>Ubicación</th>
+        <th>acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productos">
+        <td>{{ product.nombre }}</td>
+        <td>{{ product.cantidad }}</td>
+        <td>{{ product.fabricante }}</td>
+        <td>{{ product.ubicacion }}</td>
+        <td>
+          <a [routerLink]="['/productos', product.id]">Ver ubicación</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
