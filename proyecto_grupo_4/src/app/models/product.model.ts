@@ -6,4 +6,5 @@ export interface Product {
   cantidad: number;
   ubicacion: string;
   fabricante: string;
+  precio: number;
 }
