@@ -26,9 +26,6 @@ jobs:
 
       - name: Configure gcloud
         run: gcloud config set project proyecto-final2-455303
-
-      - name: Submit build to Google Cloud Build
-        run: gcloud builds submit --tag gcr.io/proyecto-final2-455303/my-app  
         
       - name: Build and push Docker image
         run: |
