@@ -1,4 +1,4 @@
-name: Deploy to Cloud Run
+name: Deploy Angular App to Cloud Run
 
 on:
   push:
@@ -13,16 +13,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Google Cloud SDK
+      - name: Set up Google Cloud
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: proyecto-final2-455303
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image to GCR
         run: |
-          gcloud builds submit --tag gcr.io/proyecto-final2-455303/proyecto-grupo-4
+          cd proyecto_grupo_4
+          gcloud builds submit --tag gcr.io/proyecto-final2-455303/proyecto-grupo-4 .
 
       - name: Deploy to Cloud Run
         run: |
