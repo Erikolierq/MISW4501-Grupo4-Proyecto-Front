@@ -1,4 +1,3 @@
-// src/app/components/product-detail/product-detail.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -28,7 +27,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
-      const id = +idParam; // convertimos a number
+      const id = +idParam;
       this.producto = this.inventoryService.getProductoById(id);
     }
   }
