@@ -1,8 +1,8 @@
 <div class="header-section">
-  <h2>Inventarios</h2>
+  <h2>Rutas/Camiones</h2>
   <div class="action-buttons">
-    <button routerLink="/productos/nuevo">+ Adjuntar un producto</button>
-    <button routerLink="/productos/masivo">+ Cargar .CSV</button>
+    <button routerLink="/camiones/nuevo">+ Nuevo camion</button>
+    <button routerLink="/productos/masivo">+ Nueva ruta</button>
   </div>
 </div>
 
@@ -10,10 +10,10 @@
   <table>
     <thead>
       <tr>
-        <th>Artículo</th>
-        <th>Cantidad</th>
-        <th>Fabricante</th>
-        <th>Acciones</th>
+        <th>Placa</th>
+        <th>Capacidad</th>
+        <th>Tipo</th>
+        <th>Ruta</th>
       </tr>
     </thead>
     <tbody>
@@ -21,10 +21,7 @@
         <td>{{ product.nombre }}</td>
         <td>{{ product.cantidad }}</td>
         <td>{{ product.fabricante }}</td>
-
-        <td>
-          <a [routerLink]="['/productos', product.id]">Ver ubicación</a>
-        </td>
+        <td>{{ product.fabricante }}</td>
       </tr>
     </tbody>
   </table>

@@ -1,0 +1,20 @@
+<div class="create-truck-card">
+  <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
+
+
+  <h2>Crear camión</h2>
+
+  <form [formGroup]="truckForm" (ngSubmit)="onSubmit()">
+    <label>Placa</label>
+    <input formControlName="nombre" type="text" placeholder="Nombre" />
+  
+    <label>Capacidad</label>
+    <input formControlName="descripcion" type="text" placeholder="Descripción" />
+  
+    <label>Tipo</label>
+    <input formControlName="tipo" type="text" placeholder="Tipo" />
+  
+    <button type="submit">Validar</button>
+  </form>
+  
+</div>

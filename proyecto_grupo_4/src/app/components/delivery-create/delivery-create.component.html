@@ -1,0 +1,24 @@
+<div class="create-delivery-card">
+  <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
+
+
+  <h2>Crear producto</h2>
+
+  <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
+    <label>Camión</label>
+    <input formControlName="Camión" type="text" placeholder="Camión" />
+
+    <label>Origen</label>
+    <input formControlName="Origen" type="text" placeholder="Origen" />
+
+    <label>Destino</label>
+    <input formControlName="Destino" type="text" placeholder="Destino" />
+
+    <label>Fecha programada</label>
+    <input formControlName="Fecha programada" type="date" placeholder="Destino" />
+    
+    
+    <button type="submit">Validar</button>
+  </form>
+  
+</div>

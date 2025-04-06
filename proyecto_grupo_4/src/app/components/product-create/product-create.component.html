@@ -1,0 +1,32 @@
+<div class="create-product-card">
+  <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
+
+
+  <h2>Crear producto</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <label>Nombre</label>
+    <input formControlName="nombre" type="text" placeholder="Nombre" />
+  
+    <label>Descripción</label>
+    <input formControlName="descripcion" type="text" placeholder="Descripción" />
+  
+    <label>Tipo</label>
+    <input formControlName="tipo" type="text" placeholder="Tipo" />
+  
+    <label>Cantidad</label>
+    <input formControlName="cantidad" type="number" placeholder="Cantidad" />
+  
+    <label>Ubicación</label>
+    <input formControlName="ubicacion" type="text" placeholder="Ubicación" />
+  
+    <label>Fabricante</label>
+    <input formControlName="fk_fabricante" type="number" placeholder="ID Fabricante" />
+  
+    <label>Precio unitario</label>
+    <input formControlName="precio_unitario" type="number" step="0.01" placeholder="Precio" />
+  
+    <button type="submit">Validar</button>
+  </form>
+  
+</div>
