@@ -6,6 +6,7 @@ import { ProductCreateComponent } from './components/product-create/product-crea
 import { ProductMasiveComponent } from './components/product-masive/product-masive.component';
 import { TruckCreateComponent } from './components/truck-create/truck-create.component';
 import { DeliveryCreateComponent } from './components/delivery-create/delivery-create.component';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
 
 export const routes: Routes = [
@@ -41,6 +42,10 @@ export const routes: Routes = [
   {
     path: 'camiones/rutanueva',
     component: DeliveryCreateComponent
+  },
+  {
+    path: 'productos/editar/:id',
+    component: ProductUpdateComponent
   },
   {
     path: '**',
