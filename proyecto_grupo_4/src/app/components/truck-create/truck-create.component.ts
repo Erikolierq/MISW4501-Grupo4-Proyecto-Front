@@ -21,14 +21,12 @@ export class TruckCreateComponent implements OnInit {
 
   ngOnInit() {
     this.truckForm = this.fb.group({
-      nombre: ['', Validators.required],
-      descripcion: [''],
-      tipo: [''],
-      cantidad: [0, [Validators.required, Validators.min(0)]],
-      ubicacion: [''],
-      fk_fabricante: [null, Validators.required],
-      precio_unitario: [0, [Validators.required, Validators.min(0)]]
+      placa: ['', Validators.required],
+      capacidad: [0, [Validators.required, Validators.min(1)]],
+      tipo: ['', Validators.required],
+      rutas: ['']
     });
+
   }
   onSubmit(): void {
     if (this.truckForm.valid) {
