@@ -14,6 +14,7 @@
         <th>Capacidad</th>
         <th>Tipo</th>
         <th>Ruta</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +23,14 @@
         <td>{{ truck.capacidad | number:'1.0-0' }} kg</td>
         <td>{{ truck.tipo }}</td>
         <td>{{ truck.rutas }}</td>
+        <td>
+          <button [routerLink]="['/camiones', truck?.camion_id]" title="Ver detalle">
+            👁️
+          </button>
+          <button [routerLink]="['/camiones/editar', truck?.camion_id]" title="Editar">
+            ✏️
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
