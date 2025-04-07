@@ -13,21 +13,43 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 1) Configurar Node
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      # 2) Instalar dependencias
+      - name: Instalar dependencias
+        run: |
+          cd proyecto_grupo_4
+          npm i
+
+      # 3) Ejecutar pruebas
+      - name: Ejecutar pruebas
+        run: |
+          cd proyecto_grupo_4
+          npm run test
+
+      # 4) Autenticarse con Google Cloud
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v1
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
+      # 5) Configurar gcloud CLI
       - name: Set up gcloud CLI
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: proyecto-final2-455303
 
+      # 6) Construir y subir la imagen Docker
       - name: Build and push Docker image
         run: |
           cd proyecto_grupo_4
           gcloud builds submit --tag gcr.io/proyecto-final2-455303/proyecto-grupo-4 .
 
+      # 7) Desplegar a Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy proyecto-grupo-4 \
