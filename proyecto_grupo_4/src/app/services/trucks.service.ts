@@ -36,4 +36,8 @@ export class TruckService {
   deleteTruck(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  getTruckById(id: number): Observable<Truck> {
+      return this.http.get<Truck>(`${this.apiUrl}/${id}`);
+    }
 }
