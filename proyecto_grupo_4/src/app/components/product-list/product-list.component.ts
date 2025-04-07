@@ -24,7 +24,16 @@ export class ProductListComponent implements OnInit {
   constructor(private inventoryService: InventoryService) {}
 
   ngOnInit(): void {
-    this.productos = this.inventoryService.getProductos();
+    // Suscribirse al Observable que retorna la data del backend
+    this.inventoryService.getProductos().subscribe({
+      next: (data: Product[]) => {
+        this.productos = data;
+      },
+      error: (error) => {
+        // Manejar el error si lo deseas
+        console.error('Error al obtener productos:', error);
+      }
+    });
   }
 
   get paginatedProducts(): Product[] {

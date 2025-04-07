@@ -1,10 +1,10 @@
-
 export interface Product {
-  id: number;
+  producto_id: number;
   nombre: string;
-  tipo: string;
   cantidad: number;
+  precio_unitario: number;
+  tipo: string;
   ubicacion: string;
-  fabricante: string;
-  precio: number;
+  descripcion: string;
+  creado_en: string;
 }
