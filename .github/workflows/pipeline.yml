@@ -19,6 +19,18 @@ jobs:
         with:
           node-version: 22
 
+      # Instalar librerías necesarias para correr Chrome headless
+      - name: Install Chrome dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 \
+            libgtk-3-0 \
+            libgbm-dev \
+            libasound2 \
+            fonts-liberation \
+            xdg-utils
+
       # 2) Instalar dependencias
       - name: Instalar dependencias
         run: |
@@ -29,7 +41,7 @@ jobs:
       - name: Ejecutar pruebas
         run: |
           cd proyecto_grupo_4
-          npm run test
+          ng test --browsers=ChromeHeadless --watch=false
 
       # 4) Autenticarse con Google Cloud
       - name: Authenticate with Google Cloud
