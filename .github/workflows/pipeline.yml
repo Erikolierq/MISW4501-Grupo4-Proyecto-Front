@@ -24,6 +24,7 @@ jobs:
         run: |
           cd proyecto_grupo_4
           npm i
+          npm install -g @angular/cli
 
       # 3) Ejecutar pruebas
       - name: Ejecutar pruebas
