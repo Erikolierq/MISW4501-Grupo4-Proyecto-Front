@@ -1,14 +1,13 @@
 <div class="csv-upload-card">
   <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
 
-  <h2>Adjuntar subir .csv</h2>
+  <h2>Cargar archivo (.csv o .xlsx)</h2>
 
   <div class="upload-box">
-    <i class="bi bi-card-image"></i>
-    <p>Adjuntar .csv</p>
-    <small>(max. 50MB)</small>
-    <input type="file" accept=".csv" />
+    <p>Adjuntar archivo</p>
+    <small>(.csv, .xls, .xlsx - máx. 50MB)</small>
+    <input type="file" (change)="onFileChange($event)" accept=".csv, .xls, .xlsx" />
   </div>
 
-  <button class="validate-button">Validar</button>
+  <button class="validate-button" (click)="uploadFile()">Validar</button>
 </div>

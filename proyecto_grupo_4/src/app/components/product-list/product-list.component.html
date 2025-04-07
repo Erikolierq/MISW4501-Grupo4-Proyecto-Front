@@ -12,18 +12,22 @@
       <tr>
         <th>Artículo</th>
         <th>Cantidad</th>
-        <th>Fabricante</th>
+        <th>Precio Unitario</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of productos">
-        <td>{{ product.nombre }}</td>
-        <td>{{ product.cantidad }}</td>
-        <td>{{ product.fabricante }}</td>
-
+        <td>{{ product?.nombre }}</td>
+        <td>{{ product?.cantidad }}</td>
+        <td>{{ product?.precio_unitario }}</td>
         <td>
-          <a [routerLink]="['/productos', product.id]">Ver ubicación</a>
+          <button [routerLink]="['/productos', product?.producto_id]" title="Ver detalle">
+            👁️
+          </button>
+          <button [routerLink]="['/productos/editar', product?.producto_id]" title="Editar">
+            ✏️
+          </button>
         </td>
       </tr>
     </tbody>

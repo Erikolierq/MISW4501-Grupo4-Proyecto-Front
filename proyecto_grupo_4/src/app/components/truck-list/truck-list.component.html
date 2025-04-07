@@ -1,8 +1,8 @@
 <div class="header-section">
-  <h2>Rutas/Camiones</h2>
+  <h2>Rutas / Camiones</h2>
   <div class="action-buttons">
-    <button routerLink="/camiones/nuevo">+ Nuevo camion</button>
-    <button routerLink="/productos/masivo">+ Nueva ruta</button>
+    <button routerLink="/camiones/nuevo">+ Nuevo camión</button>
+    <button routerLink="/rutas/nueva">+ Nueva ruta</button>
   </div>
 </div>
 
@@ -17,11 +17,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of productos">
-        <td>{{ product.nombre }}</td>
-        <td>{{ product.cantidad }}</td>
-        <td>{{ product.fabricante }}</td>
-        <td>{{ product.fabricante }}</td>
+      <tr *ngFor="let truck of camiones">
+        <td>{{ truck.placa }}</td>
+        <td>{{ truck.capacidad | number:'1.0-0' }} kg</td>
+        <td>{{ truck.tipo }}</td>
+        <td>{{ truck.rutas }}</td>
       </tr>
     </tbody>
   </table>

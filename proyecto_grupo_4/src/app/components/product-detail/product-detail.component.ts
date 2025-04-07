@@ -25,10 +25,20 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Leemos el parámetro :id de la URL
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
       const id = +idParam;
-      this.producto = this.inventoryService.getProductoById(id);
+
+      // Llamamos al servicio para obtener un producto puntual
+      this.inventoryService.getProductoById(id).subscribe({
+        next: (data: Product) => {
+          this.producto = data;
+        },
+        error: (error) => {
+          console.error('Error al obtener producto:', error);
+        }
+      });
     }
   }
 }
