@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class InventoryService {
 
-  private baseUrl = 'http://34.55.129.65:3400/inventary';
+  private baseUrl = 'http://34.55.129.65/inventary';
 
   constructor(private http: HttpClient) { }
 
