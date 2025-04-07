@@ -30,7 +30,7 @@ describe('InventoryService', () => {
       expect(products[0].nombre).toBe('P1');
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65:3400/inventary/products');
+    const req = httpMock.expectOne('http://34.55.129.65/inventary/products');
     expect(req.request.method).toBe('GET');
     req.flush([mockProducts]);
   });
@@ -42,7 +42,7 @@ describe('InventoryService', () => {
       expect(product.nombre).toBe('Test');
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65:3400/inventary/products/1');
+    const req = httpMock.expectOne('http://34.55.129.65/inventary/products/1');
     expect(req.request.method).toBe('GET');
     req.flush(mockProduct);
   });
