@@ -1,12 +1,14 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
 import { TruckCreateComponent } from './truck-create.component';
-import { ProductService } from '../../services/product.service';
+import { TruckService } from '../../services/trucks.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
-class MockProductService {
-  createProducto = jasmine.createSpy().and.returnValue(of({}));
+class MockTruckService {
+  createTruck = jasmine.createSpy().and.returnValue(of({}));
 }
+
 class MockRouter {
   navigate = jasmine.createSpy();
 }
@@ -17,9 +19,9 @@ describe('TruckCreateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TruckCreateComponent],
+      imports: [TruckCreateComponent, HttpClientModule], // ✅ Standalone components se importan
       providers: [
-        { provide: ProductService, useClass: MockProductService },
+        { provide: TruckService, useClass: MockTruckService },
         { provide: Router, useClass: MockRouter }
       ]
     }).compileComponents();
@@ -37,7 +39,7 @@ describe('TruckCreateComponent', () => {
       rutas: 'Bogotá - Cali'
     });
     component.onSubmit();
-    expect(TestBed.inject(ProductService).createProducto).toHaveBeenCalled();
+    expect(TestBed.inject(TruckService).createTruck).toHaveBeenCalled();
     expect(TestBed.inject(Router).navigate).toHaveBeenCalledWith(['/camiones']);
   });
 });
