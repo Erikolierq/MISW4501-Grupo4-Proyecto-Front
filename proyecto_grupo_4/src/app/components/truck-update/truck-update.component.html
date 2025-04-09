@@ -1,0 +1,21 @@
+<div class="edit-truck-card">
+  <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
+
+  <h2>Editar camión</h2>
+
+  <form *ngIf="truckForm" [formGroup]="truckForm" (ngSubmit)="onSubmit()">
+    <label>Placa</label>
+    <input formControlName="placa" type="text" placeholder="Ej: ABC123" />
+
+    <label>Capacidad (kg)</label>
+    <input formControlName="capacidad" type="number" placeholder="Ej: 4500" />
+
+    <label>Tipo</label>
+    <input formControlName="tipo" type="text" placeholder="Ej: Refrigerado, Carga, etc." />
+
+    <label>Ruta</label>
+    <input formControlName="rutas" type="text" placeholder="Ej: Bogotá - Medellín" />
+
+    <button type="submit">Guardar</button>
+  </form>
+</div>
