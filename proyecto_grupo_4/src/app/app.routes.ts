@@ -7,9 +7,14 @@ import { ProductMasiveComponent } from './components/product-masive/product-masi
 import { TruckCreateComponent } from './components/truck-create/truck-create.component';
 import { DeliveryCreateComponent } from './components/delivery-create/delivery-create.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: '',
     redirectTo: 'productos',
