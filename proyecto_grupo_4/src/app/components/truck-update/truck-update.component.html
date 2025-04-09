@@ -1,9 +1,9 @@
-<div class="create-truck-card">
+<div class="edit-truck-card">
   <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
 
-  <h2>Crear Camión</h2>
+  <h2>Editar camión</h2>
 
-  <form [formGroup]="truckForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="truckForm" [formGroup]="truckForm" (ngSubmit)="onSubmit()">
     <label>Placa</label>
     <input formControlName="placa" type="text" placeholder="Ej: ABC123" />
 

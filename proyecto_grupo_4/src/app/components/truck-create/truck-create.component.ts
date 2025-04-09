@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProductService } from '../../services/product.service';
+import { TruckService } from '../../services/trucks.service';
 
 @Component({
   standalone: true,
@@ -15,29 +15,27 @@ export class TruckCreateComponent implements OnInit {
   truckForm!: FormGroup;
   constructor(
         private fb: FormBuilder,
-        private productService: ProductService,
+        private truckService: TruckService,
         private router: Router
   ) { }
 
   ngOnInit() {
     this.truckForm = this.fb.group({
-      nombre: ['', Validators.required],
-      descripcion: [''],
-      tipo: [''],
-      cantidad: [0, [Validators.required, Validators.min(0)]],
-      ubicacion: [''],
-      fk_fabricante: [null, Validators.required],
-      precio_unitario: [0, [Validators.required, Validators.min(0)]]
+      placa: ['', Validators.required],
+      capacidad: [0, [Validators.required, Validators.min(1)]],
+      tipo: ['', Validators.required],
+      rutas: ['']
     });
+
   }
   onSubmit(): void {
     if (this.truckForm.valid) {
-      this.productService.createProducto(this.truckForm.value).subscribe({
+      this.truckService.createTruck(this.truckForm.value).subscribe({
         next: () => {
           this.router.navigate(['/camiones']);
         },
         error: (err: any) => {
-          console.error('Error al crear producto:', err);
+          console.error('Error al crear camión:', err);
         }
       });
     }
