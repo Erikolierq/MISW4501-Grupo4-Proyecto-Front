@@ -1,0 +1,20 @@
+<div class="create-truck-card">
+  <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
+
+
+  <h2>Crear fabricante</h2>
+
+  <form [formGroup]="manufacturerForm" (ngSubmit)="onSubmit()">
+    <label>Fabricante</label>
+    <input formControlName="Nombre" type="text" placeholder="Nombre fabricante" />
+  
+    <label>País de origen</label>
+    <input formControlName="Descripción" type="text" placeholder="País" />
+  
+    <label>Categoría</label>
+    <input formControlName="Tipo" type="text" placeholder="Categoría" />
+  
+    <button type="submit">Validar</button>
+  </form>
+  
+</div>

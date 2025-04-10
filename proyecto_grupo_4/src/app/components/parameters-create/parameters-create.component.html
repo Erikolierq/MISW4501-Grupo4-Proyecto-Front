@@ -1,0 +1,23 @@
+<div class="create-user-card">
+  <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
+
+  <h2>Adjuntar usuario</h2>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <label>Nombre y apellido</label>
+    <input formControlName="nombre" type="text" placeholder="Nombre y apellido" />
+
+    <label>Email</label>
+    <input formControlName="descripcion" type="email" placeholder="e-mail" />
+
+    <label>Tipo de acceso</label>
+    <select formControlName="Tipo">
+      <option value="" disabled selected>Seleccione un tipo de acceso</option>
+      <option value="1">Administrador</option>
+      <option value="2">Editor</option>
+      <option value="3">Lector</option>
+    </select>
+
+    <button type="submit">Validar</button>
+  </form>
+</div>

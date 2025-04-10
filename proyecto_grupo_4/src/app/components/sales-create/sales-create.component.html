@@ -1,0 +1,20 @@
+<div class="create-sales-card">
+  <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
+
+
+  <h2>Plan ventas</h2>
+
+  <form [formGroup]="salesForm" (ngSubmit)="onSubmit()">
+    <label>Nombre del vendedor</label>
+    <input formControlName="nombre" type="text" placeholder="Nombre y apellido" />
+  
+    <label>e-mail</label>
+    <input formControlName="descripcion" type="email" placeholder="e-mail" />
+  
+    <label>Meta de venda</label>
+    <input formControlName="tipo" type="number" placeholder="$$$" />
+  
+    <button type="submit">Validar</button>
+  </form>
+  
+</div>
