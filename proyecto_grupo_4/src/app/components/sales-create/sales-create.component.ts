@@ -13,24 +13,28 @@ import { Router } from '@angular/router';
 export class SalesCreateComponent implements OnInit {
 
   salesForm!: FormGroup;
-    constructor(        
+    constructor(
       private fb: FormBuilder,
       private router: Router) { }
-  
+
     ngOnInit() {
-        this.salesForm = this.fb.group({
-  
+      this.salesForm = this.fb.group({
+        nombre: ['', Validators.required],
+        descripcion: [''],
+        cantidad: [0]
       });
+
     }
-  
+
+
     onSubmit(): void {
-    
+
             console.log("creado")
-  
+
     }
-  
+
     volver() {
       this.router.navigate(['/ventas']);
-  
+
   }
   }
