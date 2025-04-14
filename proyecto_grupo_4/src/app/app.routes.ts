@@ -8,8 +8,21 @@ import { TruckCreateComponent } from './components/truck-create/truck-create.com
 import { DeliveryCreateComponent } from './components/delivery-create/delivery-create.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 import { TruckUpdateComponent } from './components/truck-update/truck-update.component';
+import { LoginComponent } from './components/login/login.component';
+import { ManufacturerListComponent } from './components/manufacturer-list/manufacturer-list.component';
+import { ManufacturerCreateComponent } from './components/manufacturer-create/manufacturer-create.component';
+import { SalesListComponent } from './components/sales-list/sales-list.component';
+import { SalesCreateComponent } from './components/sales-create/sales-create.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ParametersComponent } from './components/parameters/parameters.component';
+import { ParametersCreateComponent } from './components/parameters-create/parameters-create.component';
+
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },  
   {
     path: '',
     redirectTo: 'productos',
@@ -50,6 +63,31 @@ export const routes: Routes = [
   {
     path: 'productos/editar/:id',
     component: ProductUpdateComponent
+  },
+  {
+    path: 'fabricantes',
+    component: ManufacturerListComponent
+  },
+
+  { path: 'fabricantes/nuevo',
+    component: ManufacturerCreateComponent
+  },
+
+  {path: 'ventas',
+    component: SalesListComponent
+  },
+  {path: 'ventas/nuevo',
+    component: SalesCreateComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  { path: 'parametros',
+  component: ParametersComponent
+  },
+  { path: 'parametros/nuevo',
+    component: ParametersCreateComponent
   },
   {
     path: '**',

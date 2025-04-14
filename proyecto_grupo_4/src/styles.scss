@@ -1,3 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+
+
+html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; // Previene scroll innecesario
+  }
+  
+  app-root {
+    height: 100%;
+  }
+body { margin: 0; font-family: Roboto, "Roboto", sans-serif; }

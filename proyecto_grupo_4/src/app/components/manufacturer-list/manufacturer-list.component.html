@@ -1,0 +1,33 @@
+<div class="header-section">
+  <h2>Fabricante</h2>
+  <div class="action-buttons">
+    <button routerLink="/fabricantes/nuevo">+ Adjuntar un fabricante</button>
+  </div>
+</div>
+
+<div class="inventory-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Fabricante</th>
+        <th>País de origen</th>
+        <th>Categoría</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productos">
+        <td>{{ product?.nombre }}</td>
+        <td>{{ product?.cantidad }}</td>
+        <td>{{ product?.precio_unitario }}</td>
+        <td>
+          <button title="Ver detalle">
+            👁️
+          </button>
+          <button title="Editar">
+            ✏️
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
