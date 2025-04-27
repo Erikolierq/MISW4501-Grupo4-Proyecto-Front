@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ManufacturerService {
-  private apiUrl = 'http://34.55.129.65/manufacturer/manufacturers';
+  private apiUrl = 'http://34.55.129.65/auth/register';
   constructor(private http: HttpClient) { }
 
  createManufacturer(manufacturer: any): Observable<any> {
