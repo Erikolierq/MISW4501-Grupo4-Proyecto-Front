@@ -1,7 +1,7 @@
 <div class="header-section">
   <h2>Plan de ventas</h2>
   <div class="action-buttons">
-    <button routerLink="ventas/nuevo">+ Adjuntar un plan de ventas</button>
+    <button type="button" class="btn secondary" (click)="goToRegister()">+ Adjuntar un plan de ventas</button>
   </div>
 </div>
 
@@ -9,16 +9,23 @@
   <table>
     <thead>
       <tr>
-        <th>Nombre del vendedor</th>
-        <th>E-mail</th>
-        <th>Plan de ventas</th>
+        <th>Estado</th>
+        <th>Fecha de creación</th>
+        <th>ID Cliente</th>
+        <th>ID Vendedor</th>
+        <th>ID Pedido</th>
+        <th>Total</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of productos">
-        <td>{{ product?.nombre }}</td>
-        <td>{{ product?.cantidad }}</td>
-        <td>{{ product?.precio_unitario }}</td>
+      <tr *ngFor="let venta of ventas">
+        <td>{{ venta?.estado }}</td>
+        <td>{{ venta?.fechaCreacion }}</td>
+        <td>{{ venta?.idCliente }}</td>
+        <td>{{ venta?.idVendedor }}</td>
+        <td>{{ venta?.pedidoId }}</td>
+        <td>{{ venta?.total}}</td>
         <td>
           <button title="Ver detalle">
             👁️

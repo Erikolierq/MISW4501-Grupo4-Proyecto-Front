@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { ManufacturerService } from '../../services/manufacturer.service'; // O tu servicio real de usuarios
 
 @Component({
+  selector: 'app-salesman-create',
+  imports: [CommonModule, ReactiveFormsModule],
   standalone: true,
-  selector: 'app-manufacturer-create',
-  templateUrl: './manufacturer-create.component.html',
-  styleUrls: ['./manufacturer-create.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule]
+  templateUrl: './salesman-create.component.html',
+  styleUrl: './salesman-create.component.scss'
 })
-export class ManufacturerCreateComponent implements OnInit {
+export class SalesmanCreateComponent implements OnInit {
   manufacturerForm!: FormGroup;
 
   constructor(
@@ -37,12 +37,12 @@ export class ManufacturerCreateComponent implements OnInit {
         nombre: `${formValue.nombre} ${formValue.apellido}`,
         email: formValue.email,
         password: '123456',
-        rol: 'FABRICANTE'
+        rol: 'VENDEDOR'
       };
 
       this.ManufacturerService.createManufacturer(payload).subscribe({
         next: () => {
-          this.router.navigate(['/fabricantes']);
+          this.router.navigate(['/salesman']);
         },
         error: (err: any) => {
           console.error('Error al adjuntar usuario:', err);
@@ -53,6 +53,6 @@ export class ManufacturerCreateComponent implements OnInit {
 
 
   volver() {
-    this.router.navigate(['/fabricantes']);
+    this.router.navigate(['/salesman']);
   }
 }

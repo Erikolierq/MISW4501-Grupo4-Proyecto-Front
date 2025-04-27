@@ -4,16 +4,20 @@ import { RouterLink } from '@angular/router';
 
 import { InventoryService } from '../../services/inventory.service';
 import { Product } from '../../models/product.model';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    HttpClientModule
   ],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  styleUrls: ['./product-list.component.scss'],
+
 })
 export class ProductListComponent implements OnInit {
 
@@ -24,13 +28,13 @@ export class ProductListComponent implements OnInit {
   constructor(private inventoryService: InventoryService) {}
 
   ngOnInit(): void {
-    // Suscribirse al Observable que retorna la data del backend
+
     this.inventoryService.getProductos().subscribe({
       next: (data: Product[]) => {
         this.productos = data;
       },
       error: (error) => {
-        // Manejar el error si lo deseas
+
         console.error('Error al obtener productos:', error);
       }
     });

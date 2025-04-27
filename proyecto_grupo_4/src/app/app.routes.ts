@@ -18,6 +18,8 @@ import { ParametersComponent } from './components/parameters/parameters.componen
 import { ParametersCreateComponent } from './components/parameters-create/parameters-create.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
+import { SalesmanListComponent } from './components/salesman-list/salesman-list.component';
+import { SalesmanCreateComponent } from './components/salesman-create/salesman-create.component';
 
 export const routes: Routes = [
   {
@@ -116,6 +118,16 @@ export const routes: Routes = [
   {
     path: 'parametros/nuevo',
     component: ParametersCreateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'salesman',
+    component: SalesmanListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'salesman/nuevo',
+    component: SalesmanCreateComponent,
     canActivate: [AuthGuard]
   },
   {
