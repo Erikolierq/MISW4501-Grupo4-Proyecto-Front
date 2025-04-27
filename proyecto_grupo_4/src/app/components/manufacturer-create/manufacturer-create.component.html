@@ -1,20 +1,29 @@
-<div class="create-truck-card">
+<div class="create-user-card">
   <button class="close-button" type="button" (click)="volver()" aria-label="Cerrar">×</button>
 
-
-  <h2>Crear fabricante</h2>
+  <h2>Adjuntar un usuario</h2>
 
   <form [formGroup]="manufacturerForm" (ngSubmit)="onSubmit()">
-    <label>Fabricante</label>
-    <input formControlName="Nombre" type="text" placeholder="Nombre fabricante" />
-  
-    <label>País de origen</label>
-    <input formControlName="Descripción" type="text" placeholder="País" />
-  
-    <label>Categoría</label>
-    <input formControlName="Tipo" type="text" placeholder="Categoría" />
-  
-    <button type="submit">Validar</button>
+    <p class="section-title">Información de contacto</p>
+
+    <div class="name-fields">
+      <input formControlName="nombre" type="text" placeholder="Nombre" />
+      <input formControlName="apellido" type="text" placeholder="Apellido" />
+    </div>
+
+    <input formControlName="email" type="email" placeholder="Email *" />
+
+    <p class="section-title">Tipo de acceso</p>
+
+    <div class="role-options">
+      <label>
+        <input type="radio" formControlName="rol" value="ADMINISTRADOR" /> Administrador
+      </label>
+      <label>
+        <input type="radio" formControlName="rol" value="VENDEDOR" /> Vendedor
+      </label>
+    </div>
+
+    <button type="submit" class="validate-button">Validar</button>
   </form>
-  
 </div>

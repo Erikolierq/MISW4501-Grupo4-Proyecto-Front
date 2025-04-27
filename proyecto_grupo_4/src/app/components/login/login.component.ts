@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LoginService } from '../../services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,22 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router , private authService: LoginService) {}
 
   login() {
-    // Simulación de login (esto deberías reemplazarlo con un servicio real)
-    if (this.email === 'admin@quickduck.com' && this.password === 'admin') {
-      localStorage.setItem('isLoggedIn', 'true');
-      this.router.navigate(['/productos']);
-    } else {
-      alert('Correo o contraseña incorrectos');
-    }
+    this.authService.login(this.email, this.password)
+      .subscribe({
+        next: (response) => {
+          sessionStorage.setItem('token', response.token);
+          this.router.navigate(['/productos']);
+        },
+        error: (error) => {
+          console.error(error);
+          alert('Correo o contraseña incorrectos');
+        }
+      });
+  }
+  goToRegister() {
+    this.router.navigate(['/register']);
   }
 }
