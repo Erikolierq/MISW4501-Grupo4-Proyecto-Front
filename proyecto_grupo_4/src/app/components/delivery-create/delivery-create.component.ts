@@ -20,13 +20,10 @@ export class DeliveryCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.deliveryForm = this.fb.group({
-      nombre: ['', Validators.required],
-      descripcion: [''],
-      tipo: [''],
-      cantidad: [0, [Validators.required, Validators.min(0)]],
-      ubicacion: [''],
-      fk_fabricante: [null, Validators.required],
-      precio_unitario: [0, [Validators.required, Validators.min(0)]]
+      Camion: ['', Validators.required],
+    Origen: ['', Validators.required],
+    Destino: ['', Validators.required],
+    FechaProgramada: ['', Validators.required],
     });
   }
 
