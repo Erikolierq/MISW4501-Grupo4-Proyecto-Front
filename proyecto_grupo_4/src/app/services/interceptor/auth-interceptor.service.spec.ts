@@ -48,7 +48,7 @@ describe('AuthInterceptor', () => {
   });
 
   it('should not add Authorization header if token does not exist', () => {
-    // No seteamos token
+    sessionStorage.removeItem('token');
 
     httpClient.get(dummyUrl).subscribe(response => {
       expect(response).toBeTruthy();
