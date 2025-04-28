@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../models/product.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +12,18 @@ export class InventoryService {
 
   constructor(private http: HttpClient) { }
 
+  private getHeaders(): HttpHeaders {
+    const token = sessionStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
   getProductos(): Observable<Product[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/products`).pipe(
-      map(response => (response[0] || []).filter((p: any) => p != null))
-    );
+    return this.http.get<Product[]>(`${this.baseUrl}/products`, { headers: this.getHeaders() });
   }
 
   getProductoById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/products/${id}`);
+    return this.http.get<Product>(`${this.baseUrl}/products/${id}`, { headers: this.getHeaders() });
   }
 }

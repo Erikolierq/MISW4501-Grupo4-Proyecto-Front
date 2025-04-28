@@ -6,75 +6,94 @@ describe('TruckService', () => {
   let service: TruckService;
   let httpMock: HttpTestingController;
 
+  const mockToken = 'mock-token';
+  const apiUrl = 'http://34.55.129.65/truck/trucks';
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [TruckService]
     });
+
     service = TestBed.inject(TruckService);
     httpMock = TestBed.inject(HttpTestingController);
+
+    // Set a mock token in sessionStorage
+    sessionStorage.setItem('token', mockToken);
   });
 
-  afterEach(() => httpMock.verify());
+  afterEach(() => {
+    httpMock.verify(); // Verifica que no queden peticiones pendientes
+    sessionStorage.clear(); // Limpia token entre tests
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get all trucks', () => {
-    const mock: { camiones: Truck[] } = {
-      camiones: [
-        {
-          camion_id: 1,
-          placa: 'XYZ123',
-          capacidad: 5000,
-          tipo: 'Carga',
-          rutas: 'Bogotá - Medellín'
-        }
-      ]
-    };
+  it('should get trucks', () => {
+    const mockResponse = { camiones: [{ camion_id: 1, placa: 'ABC123', capacidad: 5000, tipo: 'Volquete', rutas: 'Ruta 1' }] };
 
-    service.getTrucks().subscribe((res) => {
-      expect(res.length).toBe(1);
-      expect(res[0].placa).toBe('XYZ123');
+    service.getTrucks().subscribe(trucks => {
+      expect(trucks.length).toBe(1);
+      expect(trucks[0].placa).toBe('ABC123');
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/truck/trucks');
+    const req = httpMock.expectOne(apiUrl);
     expect(req.request.method).toBe('GET');
-    req.flush(mock);
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
+    req.flush(mockResponse);
   });
 
   it('should create a truck', () => {
-    const newTruck = { placa: 'NEW123', capacidad: 5000, tipo: 'Refrigerado', rutas: '' };
+    const newTruck: Omit<Truck, 'camion_id'> = { placa: 'DEF456', capacidad: 4000, tipo: 'Cisterna', rutas: 'Ruta 2' };
 
-    service.createTruck(newTruck).subscribe((res) => {
-      expect(res).toEqual({});
+    service.createTruck(newTruck).subscribe(response => {
+      expect(response).toBeTruthy();
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/truck/trucks');
+    const req = httpMock.expectOne(apiUrl);
     expect(req.request.method).toBe('POST');
-    req.flush({});
+    expect(req.request.body).toEqual(newTruck);
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
+    req.flush({ success: true });
   });
 
   it('should update a truck', () => {
-    const truckUpdate = { tipo: 'Carga' };
+    const updatedTruck: Partial<Truck> = { capacidad: 4500 };
 
-    service.updateTruck(1, truckUpdate).subscribe((res) => {
-      expect(res).toEqual({});
+    service.updateTruck(1, updatedTruck).subscribe(response => {
+      expect(response).toBeTruthy();
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/truck/trucks/1');
+    const req = httpMock.expectOne(`${apiUrl}/1`);
     expect(req.request.method).toBe('PUT');
-    req.flush({});
+    expect(req.request.body).toEqual(updatedTruck);
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
+    req.flush({ success: true });
   });
 
   it('should delete a truck', () => {
-    service.deleteTruck(1).subscribe((res) => {
-      expect(res).toEqual({});
+    service.deleteTruck(1).subscribe(response => {
+      expect(response).toBeTruthy();
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/truck/trucks/1');
+    const req = httpMock.expectOne(`${apiUrl}/1`);
     expect(req.request.method).toBe('DELETE');
-    req.flush({});
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
+    req.flush({ success: true });
+  });
+
+  it('should get truck by id', () => {
+    const truck: Truck = { camion_id: 1, placa: 'GHI789', capacidad: 3000, tipo: 'Refrigerado', rutas: 'Ruta 3' };
+
+    service.getTruckById(1).subscribe(result => {
+      expect(result).toEqual(truck);
+    });
+
+    const req = httpMock.expectOne(`${apiUrl}/1`);
+    expect(req.request.method).toBe('GET');
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
+    req.flush(truck);
   });
 });

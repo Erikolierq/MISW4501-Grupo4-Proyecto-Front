@@ -9,28 +9,28 @@
     text-align: center;
     font-family: 'Roboto', sans-serif;
   }
-  
-    
+
+
     .create-sales-card h2 {
-      font-family: 'Roboto', sans-serif;      
+      font-family: 'Roboto', sans-serif;
       font-size: 32px;
       font-weight: 700;
       margin-bottom: 2rem;
     }
-    
+
     .create-sales-card form {
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
     }
-    
+
     .create-sales-card label {
       font-size: 18px;
       font-weight: 300;
       text-align: center;
       color: #000000;
     }
-    
+
     .create-sales-card input {
       font-family: "Roboto", sans-serif;
       font-size: 16px;
@@ -42,11 +42,11 @@
       font-style: italic;
       transition: border 0.2s;
     }
-    
+
     .create-sales-card input:focus {
       border-color: #4ab3ff;
     }
-    
+
     .create-sales-card button {
       font-family:"roboto", sans-serif;
       font-size: 18px;
@@ -62,11 +62,11 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
       transition: background-color 0.3s;
     }
-    
+
     .create-sales-card button:hover {
       background-color: #e65800;
     }
-    
+
     .close-button {
       position: absolute;
       top: 1rem;
@@ -87,11 +87,11 @@
       justify-content: center;
       transition: color 0.2s ease;
     }
-    
+
     .close-button:hover {
       color: #ff6500;
     }
-    
+
     .create-sales-card {
       position: relative;
       background-color: #fff;
@@ -103,4 +103,48 @@
       text-align: center;
       font-family: 'Roboto', sans-serif;
     }
-    
+
+    .detalle-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; /* Para que se acomoden si falta espacio */
+    }
+
+    .detalle-row input {
+      flex: 1 1 30%;
+      min-width: 80px;
+    }
+
+    .delete-button {
+      background-color: #ff4d4f;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      border-radius: 1rem;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .delete-button:hover {
+      background-color: #d9363e;
+    }
+
+    .add-detail-button {
+      margin-top: 1rem;
+      background-color: #4caf50;
+      padding: 0.8rem;
+      border-radius: 2rem;
+      border: none;
+      font-weight: bold;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .add-detail-button:hover {
+      background-color: #43a047;
+    }
