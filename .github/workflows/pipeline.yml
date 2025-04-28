@@ -30,7 +30,7 @@ jobs:
       - name: Ejecutar pruebas
         run: |
           cd proyecto_grupo_4
-          ng test --browsers=ChromeHeadless --watch=false
+          ng test --browsers=ChromeHeadless --watch=false --code-coverage
 
       # 4) Autenticarse con Google Cloud
       - name: Authenticate with Google Cloud
