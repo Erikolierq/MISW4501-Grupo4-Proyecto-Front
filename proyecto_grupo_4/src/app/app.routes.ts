@@ -16,81 +16,122 @@ import { SalesCreateComponent } from './components/sales-create/sales-create.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ParametersComponent } from './components/parameters/parameters.component';
 import { ParametersCreateComponent } from './components/parameters-create/parameters-create.component';
-
+import { AuthGuard } from './guards/auth.guard';
+import { RegisterComponent } from './components/register/register.component';
+import { SalesmanListComponent } from './components/salesman-list/salesman-list.component';
+import { SalesmanCreateComponent } from './components/salesman-create/salesman-create.component';
 
 export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },  
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
   {
     path: '',
-    redirectTo: 'productos',
+    redirectTo: 'redirect',
     pathMatch: 'full'
   },
   {
+    path: 'redirect',
+    canActivate: [AuthGuard],
+    component: DashboardComponent
+  },
+  {
     path: 'productos',
-    component: ProductListComponent
+    component: ProductListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'productos/nuevo',
-    component: ProductCreateComponent
+    component: ProductCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'productos/masivo',
-    component: ProductMasiveComponent
+    component: ProductMasiveComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'productos/:id',
-    component: ProductDetailComponent
+    component: ProductDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'camiones',
-    component: TruckListComponent
+    component: TruckListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'camiones/nuevo',
-    component: TruckCreateComponent
+    component: TruckCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'camiones/editar/:id',
-    component: TruckUpdateComponent
+    component: TruckUpdateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'camiones/rutanueva',
-    component: DeliveryCreateComponent
+    component: DeliveryCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'productos/editar/:id',
-    component: ProductUpdateComponent
+    component: ProductUpdateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'fabricantes',
-    component: ManufacturerListComponent
+    component: ManufacturerListComponent,
+    canActivate: [AuthGuard]
   },
-
-  { path: 'fabricantes/nuevo',
-    component: ManufacturerCreateComponent
+  {
+    path: 'fabricantes/nuevo',
+    component: ManufacturerCreateComponent,
+    canActivate: [AuthGuard]
   },
-
-  {path: 'ventas',
-    component: SalesListComponent
+  {
+    path: 'ventas',
+    component: SalesListComponent,
+    canActivate: [AuthGuard]
   },
-  {path: 'ventas/nuevo',
-    component: SalesCreateComponent
+  {
+    path: 'ventas/nuevo',
+    component: SalesCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
-  { path: 'parametros',
-  component: ParametersComponent
+  {
+    path: 'parametros',
+    component: ParametersComponent,
+    canActivate: [AuthGuard]
   },
-  { path: 'parametros/nuevo',
-    component: ParametersCreateComponent
+  {
+    path: 'parametros/nuevo',
+    component: ParametersCreateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'salesman',
+    component: SalesmanListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'salesman/nuevo',
+    component: SalesmanCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
-    redirectTo: 'productos'
+    redirectTo: 'login'
   },
 ];

@@ -1,7 +1,7 @@
 <div class="header-section">
-  <h2>Fabricantes</h2>
+  <h2>Vendedores</h2>
   <div class="action-buttons">
-    <button type="button" class="btn secondary" (click)="goToRegister()">Crear fabricante</button>
+    <button type="button" class="btn secondary" (click)="goToRegister()">Crear vendedor</button>
   </div>
 </div>
 
@@ -17,11 +17,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let fabricante of fabricantes">
-        <td>{{ fabricante?.nombreCompleto }}</td>
-        <td>{{ fabricante?.rol }}</td>
-        <td>{{ fabricante?.email }}</td>
-        <td>{{ fabricante?.usuarioId }}</td>
+      <tr *ngFor="let vendedor of vendedores">
+        <td>{{ vendedor?.nombreCompleto }}</td>
+        <td>{{ vendedor?.rol }}</td>
+        <td>{{ vendedor?.email }}</td>
+        <td>{{ vendedor?.usuarioId }}</td>
         <td>
           <button title="Ver detalle">
             👁️

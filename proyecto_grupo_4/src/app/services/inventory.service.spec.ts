@@ -7,43 +7,76 @@ describe('InventoryService', () => {
   let service: InventoryService;
   let httpMock: HttpTestingController;
 
+  const mockToken = 'mock-token';
+  const baseUrl = 'http://34.55.129.65/inventary';
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [InventoryService]
     });
+
     service = TestBed.inject(InventoryService);
     httpMock = TestBed.inject(HttpTestingController);
+
+    sessionStorage.setItem('token', mockToken); // Set token antes de cada test
   });
 
-  afterEach(() => httpMock.verify());
+  afterEach(() => {
+    httpMock.verify(); // Asegura que no queden peticiones pendientes
+    sessionStorage.clear(); // Limpia token después de cada test
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should fetch products list', () => {
-    const mockProducts: Product[] = [{ nombre: 'P1', cantidad: 5, precio_unitario: 10 } as Product];
+  it('should get productos', () => {
+    const mockProducts: Product[] = [
+      {
+        producto_id: 1,
+        nombre: 'Producto A',
+        cantidad: 10,
+        precio_unitario: 100,
+        tipo: 'Electrónica',
+        ubicacion: 'Bodega 1',
+        descripcion: 'Un excelente producto',
+        creado_en: '2024-05-01'
+      }
+    ];
 
-    service.getProductos().subscribe((products) => {
+    service.getProductos().subscribe(products => {
       expect(products.length).toBe(1);
-      expect(products[0].nombre).toBe('P1');
+      expect(products[0].nombre).toBe('Producto A');
+      expect(products[0].tipo).toBe('Electrónica');
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/inventary/products');
+    const req = httpMock.expectOne(`${baseUrl}/products`);
     expect(req.request.method).toBe('GET');
-    req.flush([mockProducts]);
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
+    req.flush(mockProducts);
   });
 
-  it('should fetch product by ID', () => {
-    const mockProduct: Product = { nombre: 'Test', cantidad: 5, precio_unitario: 10 } as Product;
+  it('should get producto by id', () => {
+    const mockProduct: Product = {
+      producto_id: 2,
+      nombre: 'Producto B',
+      cantidad: 5,
+      precio_unitario: 200,
+      tipo: 'Herramienta',
+      ubicacion: 'Almacén 2',
+      descripcion: 'Herramienta muy útil',
+      creado_en: '2024-04-30'
+    };
 
-    service.getProductoById(1).subscribe((product) => {
-      expect(product.nombre).toBe('Test');
+    service.getProductoById(2).subscribe(product => {
+      expect(product.producto_id).toBe(2);
+      expect(product.nombre).toBe('Producto B');
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/inventary/products/1');
+    const req = httpMock.expectOne(`${baseUrl}/products/2`);
     expect(req.request.method).toBe('GET');
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
     req.flush(mockProduct);
   });
 });
