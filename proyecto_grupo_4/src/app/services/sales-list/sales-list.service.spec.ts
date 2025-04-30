@@ -7,7 +7,7 @@ describe('SalesListService', () => {
   let httpMock: HttpTestingController;
 
   const mockToken = 'mock-token';
-  const salesUrl = 'http://34.55.129.65/sales/sales';
+  const salesUrl = 'https://impala-sensible-antelope.ngrok-free.app/sales/sales';
 
   beforeEach(() => {
     TestBed.configureTestingModule({

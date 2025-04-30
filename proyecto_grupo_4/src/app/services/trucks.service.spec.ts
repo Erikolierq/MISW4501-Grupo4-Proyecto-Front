@@ -7,7 +7,7 @@ describe('TruckService', () => {
   let httpMock: HttpTestingController;
 
   const mockToken = 'mock-token';
-  const apiUrl = 'http://34.55.129.65/truck/trucks';
+  const apiUrl = 'https://impala-sensible-antelope.ngrok-free.app/truck/trucks';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
