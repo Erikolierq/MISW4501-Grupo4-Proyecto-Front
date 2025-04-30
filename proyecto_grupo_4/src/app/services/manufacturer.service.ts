@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ManufacturerService {
-  private apiUrl = 'http://34.55.129.65/auth/register';
-  private sellersUrl = 'http://34.55.129.65/auth/seller/all';
-  private manufacturersUrl = 'http://34.55.129.65/auth/manufacturers/all';
+  private apiUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth/register';
+  private sellersUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth/seller/all';
+  private manufacturersUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth/manufacturers/all';
 
   constructor(private http: HttpClient) { }
 

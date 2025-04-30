@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable, catchError, map, of } from 'rxjs';
 
 export interface Truck {
   camion_id: number;
@@ -15,9 +15,10 @@ export interface Truck {
   providedIn: 'root'
 })
 export class TruckService {
-  private apiUrl = 'http://34.55.129.65/truck/trucks';
+  private apiUrl = 'https://impala-sensible-antelope.ngrok-free.app/truck/trucks';
 
   constructor(private http: HttpClient) {}
+
   private getHeaders(): HttpHeaders {
     const token = sessionStorage.getItem('token');
     return new HttpHeaders({
@@ -26,8 +27,27 @@ export class TruckService {
   }
 
   getTrucks(): Observable<Truck[]> {
-    return this.http.get<{ camiones: Truck[] }>(this.apiUrl, { headers: this.getHeaders() }).pipe(
-      map(res => res.camiones || [])
+    return this.http.get(this.apiUrl, {
+      headers: this.getHeaders().set('Accept', 'application/json'),
+      observe: 'response'  // Get the full HttpResponse
+    }).pipe(
+      map((response: any) => {
+        if (response.headers.get('Content-Type')?.includes('application/json')) {
+          if (response.body && response.body.camiones) {
+            return response.body.camiones;
+          } else {
+            console.error('Unexpected JSON response structure:', response.body);
+            return [];
+          }
+        } else {
+          console.error('Received non-JSON response:', response.body);
+          return [];
+        }
+      }),
+      catchError(err => {
+        console.error('Error al cargar camiones:', err);
+        return of([]);
+      })
     );
   }
 

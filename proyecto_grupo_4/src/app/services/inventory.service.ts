@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class InventoryService {
 
-  private baseUrl = 'http://34.55.129.65/inventary';
+  private baseUrl = 'https://impala-sensible-antelope.ngrok-free.app/inventary';
 
   constructor(private http: HttpClient) { }
 
