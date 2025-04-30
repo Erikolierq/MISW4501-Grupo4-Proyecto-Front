@@ -8,7 +8,7 @@ describe('InventoryService', () => {
   let httpMock: HttpTestingController;
 
   const mockToken = 'mock-token';
-  const baseUrl = 'http://34.55.129.65/inventary';
+  const baseUrl = 'https://impala-sensible-antelope.ngrok-free.app/inventary';
 
   beforeEach(() => {
     TestBed.configureTestingModule({

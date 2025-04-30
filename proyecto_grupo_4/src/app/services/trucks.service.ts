@@ -27,29 +27,12 @@ export class TruckService {
   }
 
   getTrucks(): Observable<Truck[]> {
-    return this.http.get(this.apiUrl, {
-      headers: this.getHeaders().set('Accept', 'application/json'),
-      observe: 'response'  // Get the full HttpResponse
-    }).pipe(
-      map((response: any) => {
-        if (response.headers.get('Content-Type')?.includes('application/json')) {
-          if (response.body && response.body.camiones) {
-            return response.body.camiones;
-          } else {
-            console.error('Unexpected JSON response structure:', response.body);
-            return [];
-          }
-        } else {
-          console.error('Received non-JSON response:', response.body);
-          return [];
-        }
-      }),
-      catchError(err => {
-        console.error('Error al cargar camiones:', err);
-        return of([]);
-      })
-    );
-  }
+  const headers = this.getHeaders();
+  return this.http.get<{ camiones: Truck[] }>(this.apiUrl, { headers }).pipe(
+    map(response => response.camiones)
+  );
+}
+
 
   createTruck(truck: Omit<Truck, 'camion_id'>): Observable<any> {
     return this.http.post(this.apiUrl, truck , { headers: this.getHeaders() });
