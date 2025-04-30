@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SalesListService {
-  private salesUrl = 'http://34.55.129.65/sales/sales';
+  private salesUrl = 'https://impala-sensible-antelope.ngrok-free.app/sales/sales';
 
   constructor(private http: HttpClient) { }
 

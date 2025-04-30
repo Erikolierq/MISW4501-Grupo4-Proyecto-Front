@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://34.55.129.65/inventary/products';
+  private apiUrl = 'https://impala-sensible-antelope.ngrok-free.app/inventary/products';
   constructor(private http: HttpClient) {}
 
   private getHeaders(): HttpHeaders {
