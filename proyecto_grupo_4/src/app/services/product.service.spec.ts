@@ -28,7 +28,7 @@ describe('ProductService', () => {
       expect(res).toEqual({});
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/inventary/products');
+    const req = httpMock.expectOne('https://impala-sensible-antelope.ngrok-free.app/inventary/products');
     expect(req.request.method).toBe('POST');
     req.flush({});
   });
@@ -40,7 +40,7 @@ describe('ProductService', () => {
       expect(res).toEqual({});
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/inventary/products');
+    const req = httpMock.expectOne('https://impala-sensible-antelope.ngrok-free.app/inventary/products');
     expect(req.request.method).toBe('POST');
     expect(req.request.body instanceof FormData).toBeTrue();
     req.flush({});
@@ -53,7 +53,7 @@ describe('ProductService', () => {
       expect(res).toEqual({});
     });
 
-    const req = httpMock.expectOne('http://34.55.129.65/inventary/products/10');
+    const req = httpMock.expectOne('https://impala-sensible-antelope.ngrok-free.app/inventary/products/10');
     expect(req.request.method).toBe('PUT');
     req.flush({});
   });

@@ -8,9 +8,9 @@ describe('ManufacturerService', () => {
 
   const mockToken = 'mock-token';
 
-  const apiUrl = 'http://34.55.129.65/auth/register';
-  const sellersUrl = 'http://34.55.129.65/auth/seller/all';
-  const manufacturersUrl = 'http://34.55.129.65/auth/manufacturers/all';
+  const apiUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth/register';
+  const sellersUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth/seller/all';
+  const manufacturersUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth/manufacturers/all';
 
   beforeEach(() => {
     TestBed.configureTestingModule({

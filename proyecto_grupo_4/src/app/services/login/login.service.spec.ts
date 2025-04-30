@@ -6,7 +6,7 @@ describe('LoginService', () => {
   let service: LoginService;
   let httpMock: HttpTestingController;
 
-  const baseUrl = 'http://34.55.129.65/auth';
+  const baseUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
