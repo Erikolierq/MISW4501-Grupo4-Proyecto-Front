@@ -27,7 +27,11 @@ export class TruckService {
   }
 
   getTrucks(): Observable<Truck[]> {
-  const headers = this.getHeaders();
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+
   return this.http.get<{ camiones: Truck[] }>(this.apiUrl, { headers }).pipe(
     map(response => response.camiones)
   );
@@ -47,6 +51,11 @@ export class TruckService {
   }
 
   getTruckById(id: number): Observable<Truck> {
-      return this.http.get<Truck>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+     return this.http.get<Truck>(`${this.apiUrl}/${id}`, { headers });
+
     }
 }
