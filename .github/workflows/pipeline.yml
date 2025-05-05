@@ -25,32 +25,53 @@ jobs:
           cd proyecto_grupo_4
           npm i
           npm install -g @angular/cli
+       # 3) Instalar Snyk y analizar el proyecto
+      - name: Instalar y autenticar Snyk
+        run: |
+          npm install -g snyk
+          snyk auth ${{ secrets.SNYK_TOKEN }}
 
-      # 3) Ejecutar pruebas
+      - name: Escanear dependencias con Snyk
+        run: |
+          cd proyecto_grupo_4
+          snyk test --severity-threshold=high
+
+      - name: Generar reporte de seguridad Snyk
+        run: |
+          npm install -g snyk-to-html
+          cd proyecto_grupo_4
+          snyk test --json | snyk-to-html -o reporte-snyk.html
+          
+      - name: Subir reporte Snyk como artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: reporte-snyk
+          path: proyecto_grupo_4/reporte-snyk.html
+      # 4) Ejecutar pruebas
       - name: Ejecutar pruebas
         run: |
           cd proyecto_grupo_4
           ng test --browsers=ChromeHeadless --watch=false --code-coverage
 
-      # 4) Autenticarse con Google Cloud
+      # 5) Autenticarse con Google Cloud
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v1
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-      # 5) Configurar gcloud CLI
+      # 6) Configurar gcloud CLI
       - name: Set up gcloud CLI
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: proyecto-final2-455303
 
-      # 6) Construir y subir la imagen Docker
+      # 7) Construir y subir la imagen Docker
       - name: Build and push Docker image
         run: |
           cd proyecto_grupo_4
           gcloud builds submit --tag gcr.io/proyecto-final2-455303/proyecto-grupo-4 .
 
-      # 7) Desplegar a Cloud Run
+      # 8) Desplegar a Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy proyecto-grupo-4 \
