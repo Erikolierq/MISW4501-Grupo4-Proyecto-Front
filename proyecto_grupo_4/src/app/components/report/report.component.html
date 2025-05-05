@@ -1,0 +1,54 @@
+<div class="reporte-wrapper">
+  <button (click)="generarPDF()" class="btn-pdf">Descargar PDF</button>
+
+  <div #reportePDF class="pdf-content">
+    <h2>Reporte del sistema</h2>
+
+    <section>
+      <h3>Productos</h3>
+      <table>
+        <tr><th>Nombre</th><th>Stock</th><th>Precio</th></tr>
+        <tr *ngFor="let p of productos">
+          <td>{{ p.nombre }}</td>
+          <td>{{ p.stock }}</td>
+          <td>{{ p.precio | currency:'USD' }}</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h3>Pedidos</h3>
+      <table>
+        <tr><th>ID</th><th>Cliente</th><th>Total</th><th>Estado</th></tr>
+        <tr *ngFor="let p of pedidos">
+          <td>{{ p.id }}</td>
+          <td>{{ p.cliente }}</td>
+          <td>{{ p.total | currency:'USD' }}</td>
+          <td>{{ p.estado }}</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h3>Fabricantes y productos</h3>
+      <table>
+        <tr><th>Fabricante</th><th>Productos</th></tr>
+        <tr *ngFor="let f of fabricantes">
+          <td>{{ f.nombre }}</td>
+          <td>{{ f.productos.join(', ') }}</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h3>Vendedores</h3>
+      <table>
+        <tr><th>Nombre</th><th>Ventas realizadas</th></tr>
+        <tr *ngFor="let v of vendedores">
+          <td>{{ v.nombre }}</td>
+          <td>{{ v.ventas }}</td>
+        </tr>
+      </table>
+    </section>
+  </div>
+</div>

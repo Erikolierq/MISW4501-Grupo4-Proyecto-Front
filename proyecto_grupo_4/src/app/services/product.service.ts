@@ -27,7 +27,11 @@ export class ProductService {
     return this.http.post(this.apiUrl, formData , { headers: this.getHeaders() });
   }
   getProductos(): Observable<any> {
-    return this.http.get(this.apiUrl, { headers: this.getHeaders() });
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+    return this.http.get<any>(this.apiUrl, { headers });
   }
 
   updateProducto(id: number, producto: any): Observable<any> {

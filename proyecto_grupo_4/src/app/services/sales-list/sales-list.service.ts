@@ -19,7 +19,11 @@ export class SalesListService {
   }
 
   getSales(): Observable<any[]> {
-    return this.http.get<any[]>(this.salesUrl, { headers: this.getHeaders() });
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+    return this.http.get<any[]>(this.salesUrl, { headers });
   }
 
   createSale(saleData: any): Observable<any> {
