@@ -13,6 +13,7 @@ export class ManufacturerService {
   constructor(private http: HttpClient) { }
 
   private getHeaders(): HttpHeaders {
+
     const token = sessionStorage.getItem('token');
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -20,13 +21,27 @@ export class ManufacturerService {
   }
 
   createManufacturer(manufacturer: any): Observable<any> {
-    return this.http.post(this.apiUrl, manufacturer, { headers: this.getHeaders() });
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+    return this.http.post(this.apiUrl, manufacturer, { headers });
+
   }
 
   getSellers(): Observable<any> {
-    return this.http.get(this.sellersUrl, { headers: this.getHeaders() });
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+    return this.http.get(this.sellersUrl, { headers });
+
   }
   getManufacturers(): Observable<any> {
-    return this.http.get(this.manufacturersUrl, { headers: this.getHeaders() });
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+    return this.http.get(this.manufacturersUrl, { headers });
   }
 }

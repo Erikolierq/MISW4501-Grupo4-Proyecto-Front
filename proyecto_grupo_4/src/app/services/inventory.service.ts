@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InventoryService {
-
   private baseUrl = 'https://impala-sensible-antelope.ngrok-free.app/inventary';
 
   constructor(private http: HttpClient) { }
@@ -15,15 +14,32 @@ export class InventoryService {
   private getHeaders(): HttpHeaders {
     const token = sessionStorage.getItem('token');
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
     });
   }
 
   getProductos(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/products`, { headers: this.getHeaders() });
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+
+    return this.http.get<Product[]>(
+      `${this.baseUrl}/products`,
+      { headers }
+    );
   }
 
   getProductoById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/products/${id}`, { headers: this.getHeaders() });
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+
+    return this.http.get<Product>(
+      `${this.baseUrl}/products/${id}`,
+      { headers }
+    );
   }
 }

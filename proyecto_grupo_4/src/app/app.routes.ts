@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 import { SalesmanListComponent } from './components/salesman-list/salesman-list.component';
 import { SalesmanCreateComponent } from './components/salesman-create/salesman-create.component';
+import {ReportComponent} from './components/report/report.component';
 
 export const routes: Routes = [
   {
@@ -128,6 +129,11 @@ export const routes: Routes = [
   {
     path: 'salesman/nuevo',
     component: SalesmanCreateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'reporte',
+    component: ReportComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -1,3 +1,89 @@
-<p>
-  dashboard works!
-</p>
+<div class="header-section">
+  <h2>Resumen general</h2>
+</div>
+<button class="btn-reporte" routerLink="/reporte">📄 Generar reporte PDF</button>
+
+<div class="kpi-cards">
+  <div class="kpi-card">
+    <h3>Total productos</h3>
+    <p>5,000</p>
+  </div>
+  <div class="kpi-card">
+    <h3>Ventas hoy</h3>
+    <p>$12,450</p>
+  </div>
+  <div class="kpi-card">
+    <h3>Camiones activos</h3>
+    <p>12</p>
+  </div>
+  <div class="kpi-card">
+    <h3>Pedidos pendientes</h3>
+    <p>48</p>
+  </div>
+</div>
+
+<div class="dashboard-tables">
+  <div class="table-section">
+    <h3>Últimos productos añadidos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Stock</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of dummyProducts">
+          <td>{{ product.nombre }}</td>
+          <td>{{ product.stock }}</td>
+          <td>${{ product.precio }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-section">
+    <h3>Últimos pedidos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Pedido</th>
+          <th>Cliente</th>
+          <th>Total</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of dummyOrders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.cliente }}</td>
+          <td>${{ order.total }}</td>
+          <td>{{ order.estado }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="chart-section">
+  <div class="chart-container">
+    <h3>Distribución de productos por categoría</h3>
+    <canvas baseChart
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [type]="doughnutChartType">
+    </canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Ventas por día</h3>
+    <canvas baseChart
+      [data]="barChartData"
+      [labels]="barChartLabels"
+      [type]="'bar'"
+      [options]="barChartOptions">
+    </canvas>
+  </div>
+</div>
+

@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  private baseUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth'; // Solo esta base URL
-
+  private baseUrl = 'https://impala-sensible-antelope.ngrok-free.app/auth';
+  //private baseUrl = 'http://34.55.129.65:3000/auth'; // Solo esta base URL
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
