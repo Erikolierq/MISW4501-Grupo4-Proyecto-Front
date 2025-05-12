@@ -1,4 +1,6 @@
 export interface Product {
+  precio: number;
+  stock: any;
   producto_id: number;
   nombre: string;
   cantidad: number;

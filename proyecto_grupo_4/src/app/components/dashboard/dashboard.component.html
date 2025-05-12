@@ -6,19 +6,19 @@
 <div class="kpi-cards">
   <div class="kpi-card">
     <h3>Total productos</h3>
-    <p>5,000</p>
+    <p>{{ totalProductos }}</p>
   </div>
   <div class="kpi-card">
     <h3>Ventas hoy</h3>
-    <p>$12,450</p>
+    <p>${{ ventasTotales }}</p>
   </div>
   <div class="kpi-card">
     <h3>Camiones activos</h3>
-    <p>12</p>
+    <p>{{ camionesActivos }}</p>
   </div>
   <div class="kpi-card">
     <h3>Pedidos pendientes</h3>
-    <p>48</p>
+    <p>{{ pedidosPendientes }}</p>
   </div>
 </div>
 
@@ -34,11 +34,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of dummyProducts">
-          <td>{{ product.nombre }}</td>
-          <td>{{ product.stock }}</td>
-          <td>${{ product.precio }}</td>
-        </tr>
+<tr *ngFor="let product of dummyProducts">
+  <td>{{ product.nombre }}</td>
+  <td>{{ product.cantidad }}</td>
+  <td>${{ product.precio_unitario }}</td>
+</tr>
       </tbody>
     </table>
   </div>
@@ -56,8 +56,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of dummyOrders">
-          <td>{{ order.id }}</td>
-          <td>{{ order.cliente }}</td>
+          <td>{{ order.pedidoId }}</td>
+          <td>{{ order.idCliente }}</td>
           <td>${{ order.total }}</td>
           <td>{{ order.estado }}</td>
         </tr>
@@ -86,4 +86,3 @@
     </canvas>
   </div>
 </div>
-
