@@ -1,8 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
+import { InventoryService } from '../../services/inventory.service';
+import { SalesListService } from '../../services/sales-list/sales-list.service';
+import { TruckService } from '../../services/trucks.service';
+import { ManufacturerService } from '../../services/manufacturer.service';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,34 +19,34 @@ import { RouterModule } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  dummyProducts = [
-    { nombre: 'Laptop Lenovo ThinkPad', stock: 15, precio: 3250.99 },
-    { nombre: 'TV Samsung', stock: 15, precio: 3250.99 },
-    { nombre: 'Switch 2', stock: 11, precio: 1000 }
-  ];
+@ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  dummyProducts: any[] = [];
+  dummyOrders: any[] = [];
+  fabricantes: any[] = [];
 
-  dummyOrders = [
-    { id: 'PED1234', cliente: 'Supermercado La 30', total: 4500, estado: 'Pendiente' },
-    { id: 'PED1235', cliente: 'Tienda Don Pepe', total: 2200, estado: 'En ruta' },
-    { id: 'PED1236', cliente: 'Mercado Central', total: 3800, estado: 'Entregado' }
-  ];
+  // KPIs
+  totalProductos = 0;
+  ventasTotales = 0;
+  camionesActivos = 0;
+  pedidosPendientes = 0;
 
-  doughnutChartLabels: string[] = ['Bebidas', 'Aseo', 'Alimentos', 'Otros'];
+  // Charts
+  doughnutChartLabels: string[] = ['Aseo', 'Bebidas', 'Alimentos'];
   public doughnutChartData = {
-    labels: ['Aseo', 'Bebidas', 'Alimentos'],
+    labels: this.doughnutChartLabels,
     datasets: [
       { data: [25, 35, 40], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }
     ]
   };
   doughnutChartType: ChartType = 'doughnut';
 
-  barChartLabels: string[] = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+  barChartLabels: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
   public barChartData = {
-    labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+    labels: this.barChartLabels,
     datasets: [
       {
         label: 'Ventas ($)',
-        data: [1200, 1500, 1700, 1100, 2100, 2500, 1800],
+        data: [] as number[],
         backgroundColor: '#FF6500'
       }
     ]
@@ -51,5 +57,80 @@ export class DashboardComponent implements OnInit {
     scales: { y: { beginAtZero: true } },
   };
 
-  ngOnInit(): void {}
+  constructor(
+    private inventoryService: InventoryService,
+    private salesListService: SalesListService,
+    private truckService: TruckService,
+    private manufacturerService: ManufacturerService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadProductos();
+    this.loadVentas();
+    this.loadCamiones();
+    this.loadFabricantes();
+  }
+
+  loadProductos() {
+    this.inventoryService.getProductos().subscribe({
+      next: (productos) => {
+        this.dummyProducts = productos.slice(0, 5);
+        this.totalProductos = productos.length;
+      },
+      error: (err) => console.error('Error productos:', err)
+    });
+  }
+
+  loadVentas() {
+this.salesListService.getSales().subscribe({
+  next: (ventas) => {
+    console.log('VENTAS:', ventas);
+    this.dummyOrders = ventas.slice(0, 5).map(v => ({
+  pedidoId: v.pedido_id,
+  total: v.total,
+  estado: v.estado,
+  idCliente: v.id_cliente
+}));
+    this.ventasTotales = ventas.reduce((acc, v) => acc + v.total, 0);
+    this.pedidosPendientes = ventas.filter(v => v.estado === 'Pendiente').length;
+    this.barChartData.datasets[0].data = [120000, 150000, 180000, 90000, 210000, 175000, 132000];
+    this.chart?.update(); // 👈 fuerza la actualización del gráfico
+  },
+  error: (err) => console.error('Error ventas:', err)
+});
+  }
+
+  loadCamiones() {
+    this.truckService.getTrucks().subscribe({
+      next: (camiones) => {
+        this.camionesActivos = camiones.length;
+      },
+      error: (err) => console.error('Error camiones:', err)
+    });
+  }
+
+  loadFabricantes() {
+    this.manufacturerService.getManufacturers().subscribe({
+      next: (fabricantes) => {
+        this.fabricantes = fabricantes;
+      },
+      error: (err) => console.error('Error fabricantes:', err)
+    });
+  }
+
+countVentasPorDia(ventas: any[]): number[] {
+  const dias = Array(7).fill(0);
+  ventas.forEach((venta) => {
+    if (!venta.fecha_creacion || isNaN(venta.total)) return;
+
+    const fecha = new Date(venta.fecha_creacion);
+    const diaSemana = fecha.getDay();
+    const total = parseFloat(venta.total) || 0;
+
+    dias[diaSemana] += total;
+  });
+  return dias;
+}
+
+
 }

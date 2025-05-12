@@ -26,7 +26,7 @@ export class InventoryService {
     );
 
     return this.http.get<Product[]>(
-      `${this.baseUrl}/products`,
+      `${this.baseUrl}/products/all`,
       { headers }
     );
   }

@@ -1,11 +1,32 @@
 <div class="reporte-wrapper">
-  <button (click)="generarPDF()" class="btn-pdf">Descargar PDF</button>
+  <button (click)="generarPDF()" class="btn-pdf">📄 Descargar PDF</button>
 
   <div #reportePDF class="pdf-content">
-    <h2>Reporte del sistema</h2>
+    <h2>📊 Reporte del sistema</h2>
 
+    <!-- KPIs -->
+    <section class="kpi-section">
+      <div class="kpi-card">Total productos: <strong>{{ totalProductos }}</strong></div>
+      <div class="kpi-card">Ventas totales: <strong>{{ ventasTotales | currency:'USD' }}</strong></div>
+      <div class="kpi-card">Camiones activos: <strong>{{ camionesActivos }}</strong></div>
+      <div class="kpi-card">Pedidos pendientes: <strong>{{ pedidosPendientes }}</strong></div>
+    </section>
+
+    <!-- Ventas por día (gráfico simulado en tabla) -->
     <section>
-      <h3>Productos</h3>
+      <h3>Ventas por día (Dom - Sáb)</h3>
+      <table>
+        <tr><th>Día</th><th>Total vendido</th></tr>
+        <tr *ngFor="let v of ventasPorDia; let i = index">
+          <td>{{ ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'][i] }}</td>
+          <td>{{ v | currency:'USD' }}</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Productos -->
+    <section>
+      <h3>Últimos productos añadidos</h3>
       <table>
         <tr><th>Nombre</th><th>Stock</th><th>Precio</th></tr>
         <tr *ngFor="let p of productos">
@@ -16,8 +37,9 @@
       </table>
     </section>
 
+    <!-- Pedidos -->
     <section>
-      <h3>Pedidos</h3>
+      <h3>Últimos pedidos</h3>
       <table>
         <tr><th>ID</th><th>Cliente</th><th>Total</th><th>Estado</th></tr>
         <tr *ngFor="let p of pedidos">
@@ -29,24 +51,14 @@
       </table>
     </section>
 
+    <!-- Fabricantes -->
     <section>
       <h3>Fabricantes y productos</h3>
       <table>
         <tr><th>Fabricante</th><th>Productos</th></tr>
         <tr *ngFor="let f of fabricantes">
           <td>{{ f.nombre }}</td>
-          <td>{{ f.productos.join(', ') }}</td>
-        </tr>
-      </table>
-    </section>
-
-    <section>
-      <h3>Vendedores</h3>
-      <table>
-        <tr><th>Nombre</th><th>Ventas realizadas</th></tr>
-        <tr *ngFor="let v of vendedores">
-          <td>{{ v.nombre }}</td>
-          <td>{{ v.ventas }}</td>
+          <td>{{ f.productos?.join(', ') || '—' }}</td>
         </tr>
       </table>
     </section>

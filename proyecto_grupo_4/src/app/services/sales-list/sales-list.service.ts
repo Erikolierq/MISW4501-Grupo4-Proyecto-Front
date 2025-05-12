@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class SalesListService {
   private salesUrl = 'https://impala-sensible-antelope.ngrok-free.app/sales/sales';
+  //private salesUrl = 'http://http://34.55.129.65:3000/sales/sales'; // Solo esta base URL
 
   constructor(private http: HttpClient) { }
 
