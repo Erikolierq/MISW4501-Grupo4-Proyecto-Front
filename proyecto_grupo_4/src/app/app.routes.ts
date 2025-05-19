@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SalesmanListComponent } from './components/salesman-list/salesman-list.component';
 import { SalesmanCreateComponent } from './components/salesman-create/salesman-create.component';
 import {ReportComponent} from './components/report/report.component';
+import { SalesEditComponent } from './components/sales-edit/sales-edit.component';
 
 export const routes: Routes = [
   {
@@ -136,6 +137,8 @@ export const routes: Routes = [
     component: ReportComponent,
     canActivate: [AuthGuard]
   },
+  { path: 'ventas/editar/:id', component: SalesEditComponent, canActivate: [AuthGuard] },
+
   {
     path: '**',
     redirectTo: 'login'

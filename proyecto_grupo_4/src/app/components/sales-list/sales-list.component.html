@@ -27,12 +27,8 @@
         <td>{{ venta?.pedidoId }}</td>
         <td>{{ venta?.total}}</td>
         <td>
-          <button title="Ver detalle">
-            👁️
-          </button>
-          <button title="Editar">
-            ✏️
-          </button>
+          <button title="Editar" (click)="router.navigate(['/ventas/editar', venta.pedidoId])">✏️</button>
+
         </td>
       </tr>
     </tbody>
