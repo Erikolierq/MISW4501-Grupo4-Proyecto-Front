@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SalesListComponent implements OnInit {
   ventas: any[] = [];
-  constructor(private salesListService: SalesListService, private router: Router) { }
+  constructor(private salesListService: SalesListService, public router: Router) { }
 
 
   ngOnInit() {
