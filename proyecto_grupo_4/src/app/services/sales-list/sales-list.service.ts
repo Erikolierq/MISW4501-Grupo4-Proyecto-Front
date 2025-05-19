@@ -30,4 +30,16 @@ export class SalesListService {
   createSale(saleData: any): Observable<any> {
     return this.http.post<any>(this.salesUrl, saleData, { headers: this.getHeaders() });
   }
+
+  editSale(id: number, saleData: any): Observable<any> {
+    return this.http.patch<any>(`${this.salesUrl}/${id}/items`, saleData, { headers: this.getHeaders() });
+  }
+
+  getSaleById(id: number): Observable<any> {
+    const headers = this.getHeaders().set(
+      'ngrok-skip-browser-warning',
+      '69420'
+    );
+    return this.http.get<any>(`${this.salesUrl}/${id}`, { headers });
+  }
 }
